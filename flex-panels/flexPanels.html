@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./flex.css">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="panels">
+    <div class="panel panel1">
+       <p>Hey</p>
+       <p>Let's</p> 
+       <p>Dance</p>
+    </div>
+
+    <div class="panel panel2">
+        <p>Real</p>
+        <p>Realise</p> 
+        <p>Lies</p>
+     </div>
+
+     <div class="panel panel3">
+        <p>No</p>
+        <p>Flex</p> 
+        <p>Zone</p>
+     </div>
+
+     <div class="panel panel4">
+        <p>Push</p>
+        <p>Your</p> 
+        <p>Limits</p>
+        
+     </div>
+</div>
+
+<script>
+const click=document.querySelectorAll('.panel');
+
+function whenclick() {
+    this.classList.toggle('open');
+};
+
+function toggleactive(e){
+    if (e.propertyName === 'flex-grow'){
+        this.classList.toggle('open-active');
+    }
+}
+
+
+click.forEach(panel => panel.addEventListener("click", whenclick));
+click.forEach(panel => panel.addEventListener("transitionend", toggleactive));
+
+
+
+</script>
+
+</body>
+</html>

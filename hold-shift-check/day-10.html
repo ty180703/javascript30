@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>day 10</title>
+  </head>
+  <body>
+    <div class="inbox">
+      <div class="item">
+        <input type="checkbox" />
+        <p>number 1</p>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" />
+        <p>number 2</p>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" />
+        <p>number 3</p>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" />
+        <p>number 4</p>
+      </div>
+
+      <div class="item">
+        <input type="checkbox" />
+        <p>number 5</p>
+      </div>
+    </div>
+
+    <style>
+      .inbox {
+        background: white;
+        display: inline-block;
+        border: 1px solid black;
+        width: 100%;
+        float: left;
+      }
+
+      .item {
+        display: inline-block;
+        width: 50%;
+      }
+    </style>
+    <script>
+      const checkboxes = document.querySelectorAll(
+        '.inbox input[type="checkbox"]'
+      );
+
+      let lastChecked;
+
+      function handlecheck(e) {
+        let inBetween = false;
+        if (e.shiftKey && this.checked) {
+          checkboxes.forEach((checkbox) => {
+            if (checkbox === this || checkbox === lastChecked) {
+              inBetween = !inBetween;
+            }
+
+            if (inBetween) {
+              checkbox.checked = true;
+            }
+          });
+        }
+        lastChecked = this;
+      }
+      checkboxes.forEach((checkbox) =>
+        checkbox.addEventListener("click", handlecheck)
+      );
+    </script>
+  </body>
+</html>

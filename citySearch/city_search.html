@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./">
+    <script src=""></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+
+            <input type="text" class="searchBar" placeholder="City or Place">
+            <a href="">
+                <li class="fas fa-search"></li> <!--makes a little search icon -->
+            </a>
+            <ul class="querys" >
+                <li>City or Place</li>
+            </ul>
+       
+    </div>
+<style>
+    body{
+        background-color: blanchedalmond;
+        display: flex;
+        
+        height: 100vh;
+      
+    }
+
+  
+    .querys{
+        padding: 5px;
+        width: 173px;
+       
+    }
+
+    .container{
+        margin: 220px auto;
+        background: #ffff;
+        padding: 5px;
+        display: flex;
+        height: 30px;
+        border-radius: 30px;
+        padding: 10px 20px ;
+        align-items: center;
+        transition: 0.8s;
+        box-sizing: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .container:hover input{
+        width: 350px;
+        cursor: pointer; /*makes ur cursor into a pointer to indicate a change*/
+    }
+
+    .container input{
+        background: transparent;
+        border: none;
+        outline: none;
+        width: 0px;
+        font-weight: 500;
+        font-size: 16px;
+        transition: 0.8s;
+    } 
+
+    .container a li .fas{
+        color: blueviolet;
+    }
+
+    ul{
+        list-style: none;
+        margin: 0%;
+    }
+
+</style>
+
+<script>
+const endpoint = 'https://raw.githubusercontent.com/lutangar/cities.json/master/cities.json';
+
+let cities = [];
+
+fetch(endpoint).then(blob => blob.json()).then(data => cities = data);
+
+function findMatches(wordtoMatch, cities) {
+    return cities.filter(place => {
+        //figure out if what searched matches a specific city 
+        const regex = new RegExp(wordtoMatch, 'gi');
+        return place.name.match(regex);
+    })
+};
+
+function displaySearch(){
+    const lookup = findMatches(this.value, cities);
+    const html = lookup.map(place => {
+        return `
+            <li>
+                <span class="name">${place.country},${place.name}</span>    
+            </li>
+        `;
+    }).join('');
+    suggest.innerHTML = html;
+};
+
+const searchInput = document.querySelector(".searchBar");
+
+const suggest = document.querySelector('.querys');
+
+searchInput.addEventListener('change', displaySearch);
+searchInput.addEventListener('keyup', displaySearch);
+
+</script>
+
+
+      
+</body>
+</html>
